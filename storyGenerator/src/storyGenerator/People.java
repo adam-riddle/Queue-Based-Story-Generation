@@ -1,47 +1,32 @@
-/*Copyright [2015] [Adam Riddle]
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.*/
-
-/*This is the default class for the actor agents*/
-
+// the actors of the story
 package storyGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-// A basic actor
 public class People {
 	
-	Behavior behavior;
+	Behavior behavior;// attribute to guide actions character will likely take
 	
-	String name;
+	String name;// name of character
+	
 	ArrayList<Rule> ruleArrayList = new ArrayList<Rule>();
 	
 	public People(World w, String n){
+		//creates character
 		
-		behavior = new Behavior(); //Behavior controls when the agent chooses to do
+		behavior = new Behavior();
 		
 		name = n;
 		World world = w;
 		
-		createRuleArrayList(); // initialized the list of rules
+		createRuleArrayList();
 		
 	}//People
 	
-	
-	// initialized the list of rules
 	void createRuleArrayList(){
+		// creates rules for character
 		RuleList rulelist;
 		rulelist = new RuleList();
 				
@@ -60,7 +45,6 @@ public class People {
 		
 	}//createRuleArrayList
 	
-	//Picks the next rule
 	ArrayList<Rule> queryRules(World world){
 
 		ArrayList<Rule> newRuleArrayList = new ArrayList<Rule>();
@@ -104,7 +88,6 @@ public class People {
 		
 	}//queryList
 	
-	//Converts strings for rules to be stored in hashmaps for easy retrieval
  HashMap<String,Object> stringToHashmap(String text){
 	
 	HashMap<String, Object> hashmap = new HashMap<String, Object>();
@@ -121,9 +104,7 @@ public class People {
 	return hashmap;
  }//stringToHashmap
 	
-	
- // removes used rule
- void removeRule(String n){
+	void removeRule(String n){
 		
 		for(int s=0; s <ruleArrayList.size(); s++){
 			
@@ -137,14 +118,12 @@ public class People {
 		
 	}//removeRule
 	
-	//Updates actor
- void update(){
+	void update(){
 		
 		behavior.changeState();
 		
 	}//update
 	
-   //resetRules
 	void resetRules(){
 		
 		for(int i=0; i <ruleArrayList.size(); i++){

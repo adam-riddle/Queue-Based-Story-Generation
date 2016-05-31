@@ -1,19 +1,4 @@
-/*Copyright [2015] [Adam Riddle]
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.*/
-
-/*This is the main class*/
-
+//Main function, runs the story
 package storyGenerator;
 
 import java.util.ArrayList;
@@ -30,7 +15,7 @@ public class Main {
 		
 		World world;
 		world = new World();
-		//IBTLibrary btLibrary = new TerranMarineBTLibrary();
+		
 		
 		ArrayList<Rule> newRuleArrayList = new ArrayList<Rule>();
 		
@@ -42,21 +27,21 @@ public class Main {
 		
 		while(true){
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			//QueryRules
+			//Add rules to queue
 			newRuleArrayList.addAll(person.queryRules(world));
 			newRuleArrayList.addAll(person1.queryRules(world));
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-		int highestPCount = 0;
+		int highestPCount = 0;             // PCount is the number of ways the rule is correct for the world
 
-		if(newRuleArrayList.isEmpty()){
+		if(newRuleArrayList.isEmpty()){ // if no more new rules, end story
 			
 			System.out.print(" The End");
 			break;
 			
 		}//if
 		
-		for(int t=0; t < newRuleArrayList.size(); t++){
+		for(int t=0; t < newRuleArrayList.size(); t++){// find best fitting rule
 			
 			if(highestPCount <= newRuleArrayList.get(t).getPCount() && newRuleArrayList.get(t).getPCount() > 0){
 				
@@ -71,7 +56,7 @@ public class Main {
 			
 		}//for		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+		// if there are more than one fitting rule a random rule is chosen
 		int num = 0;
 		Rule output = null;
 		
@@ -87,6 +72,7 @@ public class Main {
 		
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// updates world and removes used rules
 		
 		world.getWorld().putAll(output.getMemories());
 		output.resetPCount();
